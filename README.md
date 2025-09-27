@@ -65,6 +65,10 @@ Or build a binary first:
   - Windows: `./go_transform.exe exampleFiles/transform.json`
   - macOS/Linux: `./go_transform exampleFiles/transform.json`
 
+## Install from a repository URL
+`go install https://github.com/polakv93/go_transform@latest`  
+After installation, the binary (go_transform) will be placed in GOPATH/bin or GOBIN if set.
+
 ### CLI help
 
 - `go run . -help`
