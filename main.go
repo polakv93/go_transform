@@ -10,15 +10,14 @@ func main() {
 	help := flag.Bool("help", false, "Display help")
 	flag.Parse()
 
-	if *help {
+	if *help || flag.NArg() != 1 {
 		printHelp()
 		return
 	}
 
-	x := flag.Args()
-	fmt.Print(x)
+	transformFilePath := flag.Arg(0)
 
-	err := transform.ExecuteTransform("exampleFiles/transform.json")
+	err := transform.ExecuteTransform(transformFilePath)
 	if err != nil {
 		panic(err)
 	}
