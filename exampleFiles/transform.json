@@ -1,0 +1,7 @@
+{
+  "__targets": [
+    "exampleFiles/target1.json",
+    "exampleFiles/target2.json"
+  ],
+  "somekey": "somevalue2"
+}
