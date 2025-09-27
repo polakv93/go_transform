@@ -7,7 +7,7 @@ Note: This README documents the current behavior as implemented in the repositor
 ## Overview
 
 - Language/Stack: Go (Go modules)
-- Module name: `go_transform` (see `go.mod`)
+- Module name: `github.com/polakv93/go_transform` (see `go.mod`)
 - Entry point: `main.go`
 - Primary package: `transform` (in `transform/transform.go`)
 - Package manager/build tool: Go toolchain (no external dependencies)
@@ -66,7 +66,7 @@ Or build a binary first:
   - macOS/Linux: `./go_transform exampleFiles/transform.json`
 
 ## Install from a repository URL
-`go install https://github.com/polakv93/go_transform@latest`  
+`go install github.com/polakv93/go_transform@latest`  
 After installation, the binary (go_transform) will be placed in GOPATH/bin or GOBIN if set.
 
 ### CLI help

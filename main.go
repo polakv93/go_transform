@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go_transform/transform"
+	"github.com/polakv93/go_transform/transform"
 )
 
 func main() {
