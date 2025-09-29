@@ -25,7 +25,7 @@ func RunTui(directoryWithTransforms string) error {
 		items = append(items, file)
 	}
 
-	l := list.New(items, itemDelegate{}, 20, 14)
+	l := list.New(items, itemDelegate{}, 20, 25)
 	l.Title = "Transform files"
 
 	m := model{list: l}
