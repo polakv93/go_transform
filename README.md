@@ -2,14 +2,11 @@
 
 A tiny command‑line utility written in Go that applies a JSON "transform" to one or more target JSON files. The transform file declares a special key `"__targets"` listing the files to modify; the rest of the JSON is merged into each target. Results overwrite the original target files.
 
-Note: This README documents the current behavior as implemented in the repository. TODO items are included where information is unknown or where improvements could be made.
-
 ## Overview
 
 - Language/Stack: Go (Go modules)
 - Module name: `github.com/polakv93/go_transform` (see `go.mod`)
 - Entry point: `main.go`
-- Primary package: `transform` (in `transform/transform.go`)
 - Package manager/build tool: Go toolchain (no external dependencies)
 
 How it works:
@@ -44,7 +41,7 @@ No special setup is required beyond having Go installed.
   - `go version`
   - `go env GOPATH`
 
-- Pull dependencies (none external):
+- Pull dependencies:
   - `go mod tidy` (optional; `go.mod` currently has no third‑party requirements)
 
 ## Build and Run
@@ -73,11 +70,3 @@ After installation, the binary (go_transform) will be placed in GOPATH/bin or GO
 
 - `go run . -help`
 - Or with a built binary: `./go_transform -help`
-
-Usage output:
-```
-Usage: [flags] <transform file path>
-Available flags:
-  -help
-        Display help
-```
