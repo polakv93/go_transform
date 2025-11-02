@@ -4,41 +4,39 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/jeremywohl/flatten"
 )
+
+import "github.com/tidwall/sjson"
 
 const targetsKey = "__targets"
 
 func ExecuteTransform(transformFilePath string) error {
-	transform, _ := readJsonFile(transformFilePath)
+	transform, err := readJsonFile(transformFilePath)
+	if err != nil {
+		return err
+	}
 	transform, targets := extractTargets(transform)
+	flattenTransformKeys, err := flatten.Flatten(transform, "", flatten.DotStyle)
+	if err != nil {
+		panic(fmt.Sprintf("failed to flatten transform: %v", err))
+	}
 
 	for _, target := range targets {
-		fileContentToTransform, _ := readJsonFile(target)
-		transformed := mergeMaps(fileContentToTransform, transform)
-		fmt.Printf("Transformed %s using %s\n", target, transformFilePath)
-		out, err := json.MarshalIndent(transformed, "", "  ")
-		if err != nil {
-			return err
+		fileContentBytes, _ := os.ReadFile(target)
+
+		for path := range flattenTransformKeys {
+			fileContentBytes, _ = sjson.SetBytes(fileContentBytes, path, flattenTransformKeys[path])
 		}
-		err = os.WriteFile(target, out, 0644)
+
+		fmt.Printf("Transformed %s using %s\n", target, transformFilePath)
+		err = os.WriteFile(target, fileContentBytes, 0644)
 		if err != nil {
 			return err
 		}
 	}
 	return nil
-}
-
-func mergeMaps(base, patch map[string]interface{}) map[string]interface{} {
-	for k, v := range patch {
-		if bv, ok := base[k].(map[string]interface{}); ok {
-			if pv, ok := v.(map[string]interface{}); ok {
-				base[k] = mergeMaps(bv, pv)
-				continue
-			}
-		}
-		base[k] = v
-	}
-	return base
 }
 
 func extractTargets(transform map[string]interface{}) (map[string]interface{}, []string) {

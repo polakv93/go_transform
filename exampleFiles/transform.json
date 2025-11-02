@@ -3,5 +3,8 @@
     "exampleFiles/target1.json",
     "exampleFiles/target2.json"
   ],
-  "somekey": "somevalue2"
+  "somekey": "somevalue2",
+  "someNestedKey": {
+    "nested": 11
+  }
 }
